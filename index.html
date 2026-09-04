@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
+    /* Paleta extraída diretamente da apresentação institucional oficial */
     --ink:#141414; --ink-soft:#1c1c1c;
     --paper:#f7f6f3;
     --charcoal:#4a4a48; --muted:#8a8783;
@@ -34,7 +35,7 @@
   }
 
   .hero{ padding:44px 30px 30px; text-align:center; border-bottom:1px solid var(--rule); }
-  .logo-mark{ width:52px; height:52px; margin:0 auto 16px; display:block; fill:var(--gold); }
+  .logo-mark{ width:58px; height:auto; margin:0 auto 16px; display:block; }
   .wordmark{ font-family:var(--sans); font-weight:700; font-size:0.98rem; letter-spacing:0.16em; color:var(--paper); }
   .segmento{ margin-top:6px; font-family:var(--mono); font-size:10.5px; letter-spacing:0.1em; color:var(--gold-light); text-transform:uppercase; }
 
@@ -67,39 +68,6 @@
   .btn svg{ width:19px; height:19px; flex-shrink:0; }
   .btn .sub{ display:block; font-weight:400; font-size:0.78rem; opacity:0.7; margin-top:1px; }
 
-  /* Seção do QR Code em tamanho estratégico e compacto */
-  .qr-compact-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 20px;
-    padding: 12px 16px;
-    background: rgba(247, 246, 243, 0.03);
-    border: 1px dashed rgba(184, 146, 75, 0.35);
-    border-radius: 8px;
-  }
-  .qr-compact-card img {
-    width: 90px;
-    height: 90px;
-    border-radius: 6px;
-    background: #fff;
-    padding: 4px;
-    flex-shrink: 0;
-  }
-  .qr-compact-info dt {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 2px;
-  }
-  .qr-compact-info dd {
-    font-size: 0.8rem;
-    color: rgba(247, 246, 243, 0.75);
-    line-height: 1.35;
-  }
-
   .info{ padding:24px 30px 30px; }
   .field{ margin-bottom:16px; }
   .field:last-child{ margin-bottom:0; }
@@ -109,6 +77,14 @@
   .trust{ padding:24px 30px 30px; border-top:1px solid var(--rule); }
   .trust .label{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
   .trust .names{ font-size:0.85rem; color:rgba(247,246,243,0.65); line-height:1.7; }
+
+  .qr-block{
+    padding:26px 30px 4px; border-top:1px solid var(--rule);
+    display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center;
+  }
+  .qr-img{ width:84px; height:84px; border-radius:8px; padding:6px; background:var(--paper); }
+  .qr-label{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); line-height:1.6; }
+  .qr-label span{ color:var(--gold-light); }
 
   .foot{
     padding:20px 30px 32px; display:flex; justify-content:space-between; align-items:center;
@@ -129,10 +105,7 @@
 <div class="page">
 
   <div class="hero">
-    <svg class="logo-mark" viewBox="0 0 24 24">
-      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.09 8.78-7 9.88-3.91-1.1-7-5.34-7-9.88V6.3l7-3.12zM12 6a3.5 3.5 0 00-3.5 3.5c0 1.54.99 2.85 2.38 3.32L9.5 17h5l-1.38-4.18A3.502 3.502 0 0015.5 9.5C15.5 7.57 13.93 6 12 6z"/>
-    </svg>
-
+    <img class="logo-mark" alt="Logo BAWESC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACFCAYAAADCZ8MbAAAFK0lEQVR4nO2dQXbbMBBDx3k5Vk/a+/Rc6aJV4jiWTFHkEMDgb5JN34M4nzCppO3tz+9fUYyP/19vS1OYS7ytDmBMD9XE/dj53pBRSVyLKkQlcZ9hmUmpIq4FFaOKuEdYakIqiNsipuUlQ11cCymKurhnsOREKItrEYVRFrcHy06CqrgWUBxVca9g6QlQFHeEeJYXHDVxLVwR1MQdiTcBMEriWrRCKIk7A28GUFTEtWDFUBF3Jt4UgCiImyGW5QWDXVwLVZT3yB0+818J/4j8/N6YO2Q37uhBMG+EV1jaA97CLXIG5uxSbI3L3FzM2ffwBjnmtupyxjyY2dmZ1yaNe3GZm8vHnTrcIta+DvNF7SfeEMd8zvhRXIXhZ2HJFrL6BxBu3S+8EY75Nttn4vq82M6o7MxrsIS9xmVuLm88PX7MdPVRYaPykcHid3AkLtPwV2P55vHUQ5TGjajZuhb+mN0ZvhLX58V2mLPT0dK4DM21B3J2i37M4eyQjgobzANtzc78jBC0iovcXK/wcYePlzNDbNwI7YuaxR7AGXGRho+O5eynyTPUxo3QbF0LfUzzjM6K6/NiO8zZ4elpXITm6mVldot8zKnZIB8VNpgHzpwdmvfOP3cL3qFkZ9/+PQamT6rs2Z5eG4bGjdC8qJl/dM3iirgefjtMn04UWVkaN8Ktq0j3DK6K69dj7TBkZ8gYEWMal7m5vPHWcWntmY4KGx7+HKjWdZS4bt12EAWBf/31CGPjRviixsyQtR4prpurHaTsSFmaYW3cGbh15zNsjUeL69ZtByE7QoYuZjQuc3NV2nh0F7J7FI4KvqgVZJa4Hn47K1qXum0jNBo3wq2LzJS1nClupfPiVbJ/P5ie2Y3L3FzM2VGYtoYqR4UN5jbx/0l8ggxxmZtL6bhDfyG7R61xI3xRK0GWuB5+OzOaUaptIzQbN8Ktu5KUtcoUV+m8OJuR2ZnXYZfsxmVuLubsWaStkepRYYP5yDAiu2TbRqwR183VzhXx5C5k96g3bgR367KQviarxPVFrZ2e7MzP28TKxmVuLubso1myFhWOChvMLXQmO/NzNrNaXObm8nFn4fxWi5uN+kUNUe4pIIiLNnxkjsSUfv31CIK42ai3bgbLnxlFXJ8X23mWnfl5ukARNwJgF1+AOftZIJ4VSdxsmFvqY+f7MqCJC7GbO1lx3Cl1IbsHTdxsfFEjBVFcDx8TqLkgipuNW/c1cM+EKq5fj5lDUMWNANzlJ2DO/gjksyCLm41blwh0cSF3eyPM2TdgnwFd3Gx8UfsCOjuDuNALaNbAIG42bl2CzCzi+vWY+QaLuBEELXAAU3aKrEziZuPWBYZNXIo22IEhO0PGiOATN5tKFzXkbD9gFNcXNUMpbgRZOzyAmB0x0yGs4mbj1gWDWVy6lrgDKTtSlmaYxc2m0kUNHnZxPfxr0K4fu7jZKLUurbQRGuL69VhBFMSN4G6PFdmZ1ysidMQ1xVASl7lFMrMzr9MnSuJmMWvwEkJloSbu7OGzy8We/xM1cdmZKZaMtBGa4vqjvACK4kZwSzYjO/N6PEVV3NHIDZ4dZXFHycb+AwLJTacsLjsjhJOUNkJf3KuDkx08O+risnNl40hvugri9g5QevDsVBA3glvCnuzMz9tEFXHPIj94diqJyyzjmezMz9lMJXFbQR18Sy7U7MOpJu6rwZYZPDvVxGXnaGOV2nQVxd0bcKnBs1NR3AhuSZ9lZ36eLqqK+wjb4NnyDqeyuLeHr6yw5+/iLxpVm96+uvVGAAAAAElFTkSuQmCC">
     <div class="wordmark">BAWESC SERVIÇOS</div>
     <div class="segmento">Terceirização de mão de obra</div>
 
@@ -187,19 +160,16 @@
         <dd>Wellington Diogo — Gerente Operacional dedicado a cada implantação</dd>
       </div>
     </dl>
-
-    <div class="qr-compact-card">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bawescservicos.vercel.app/" alt="QR Code BAWESC">
-      <div class="qr-compact-info">
-        <dt>Compartilhar</dt>
-        <dd>Aponte a câmera para abrir este cartão digital direto no seu celular.</dd>
-      </div>
-    </div>
   </div>
 
   <div class="trust">
     <div class="label">Confiança de mercado</div>
     <div class="names">CAS · H2M · Ceasa · Grupo Viamar · Condomínio Casuarina · Sabenauto · Consigaz — e diversos outros clientes.</div>
+  </div>
+
+  <div class="qr-block">
+    <img class="qr-img" alt="QR Code — bawescservicos.vercel.app" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&color=141414&bgcolor=f7f6f3&data=https%3A%2F%2Fbawescservicos.vercel.app%2F">
+    <div class="qr-label">Aponte a câmera para acessar<br><span>bawescservicos.vercel.app</span></div>
   </div>
 
   <div class="foot">
